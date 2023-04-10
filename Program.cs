@@ -15,8 +15,45 @@ namespace SWS120Project
         static List<Class1.faculty> faculties = new List<Class1.faculty>();
         static List<Class1.collegeProgram> programs = new List<Class1.collegeProgram>();
 
-        //validation method for int
+        //validation method for int static int validInt()
+    static int validInt()
+        {
+            while(true)
+            {
+                try
+                {
+                    int input = int.Parse(Console.ReadLine());
+                    return input;
+                }
+                catch
+                {
+                    Console.WriteLine("Please Enter a valid number!");
+                }
+            }
+        }
 
+        static string validEmail()
+        {
+            while (true)
+            {
+            
+                    string input = (Console.ReadLine());
+
+                if (!input.Contains("@"))
+                {
+                    Console.WriteLine("Please Enter a valid email!");
+                }
+                else {
+
+                    return input;
+                    //break;
+                }
+
+                    
+
+               
+            }
+        }
         static void Main(string[] args)
         {
 
@@ -40,9 +77,9 @@ namespace SWS120Project
                 Console.WriteLine("6. Display student information");
                 Console.WriteLine("7. Display course information");
                 Console.WriteLine("8. Display all courses taken by a student");
-                Console.WriteLine("9. Display all students taking a particular course");
-                Console.WriteLine("10. Display all courses taught by a particular faculty");
-                Console.WriteLine("11. Display all students in a particular program");
+                Console.WriteLine("9. Display all students taking a certain course");
+                Console.WriteLine("10. Display all courses taught by a certain faculty");
+                Console.WriteLine("11. Display all students in a certain program");
                 Console.WriteLine("12. Exit");
 
                 string input = Console.ReadLine();
@@ -62,7 +99,7 @@ namespace SWS120Project
                         addProgram();
                         break;
                     case "5":
-                        createEnrolment();
+                        EnrollStudent();
                         break;
                     case "6":
                         displayStudent();
@@ -96,9 +133,9 @@ namespace SWS120Project
         {
             Console.WriteLine("Enter student ID:");
 
-            
-           
-            int studentID = int.Parse(Console.ReadLine());
+
+           int studentID = validInt();
+           // int studentID = int.Parse(Console.ReadLine());
             
             Console.WriteLine("Enter first name:");
             string firstName = Console.ReadLine();
@@ -106,8 +143,9 @@ namespace SWS120Project
             Console.WriteLine("Enter last name:");
             string lastName = Console.ReadLine();
 
+
             Console.WriteLine("Enter email:");
-            string email = Console.ReadLine();
+            string email = validEmail();
 
             Console.WriteLine("Enter phone number:");
             string phoneNumber = Console.ReadLine();
@@ -124,7 +162,7 @@ namespace SWS120Project
         public static void addFaculty()
         {
             Console.WriteLine("Enter faculty member ID:");
-            int facultyID = int.Parse(Console.ReadLine());
+            int facultyID = validInt(); 
 
             Console.WriteLine("Enter first name:");
             string firstName = Console.ReadLine();
@@ -133,7 +171,7 @@ namespace SWS120Project
             string lastName = Console.ReadLine();
 
             Console.WriteLine("Enter email:");
-            string email = Console.ReadLine();
+            string email = validEmail();
 
             Console.WriteLine("Enter phone number:");
             string phoneNumber = Console.ReadLine();
@@ -155,13 +193,14 @@ namespace SWS120Project
 
             Console.WriteLine("Enter Faculty ID");
 
-            int facultyID = int.Parse(Console.ReadLine());
+            int facultyID = validInt();
 
             Console.WriteLine("Enter credit hours");
 
-            int creditHours = int.Parse(Console.ReadLine());
+            int creditHours = validInt();
 
             Class1.course newCourse = new Class1.course(courseCode, courseName, facultyID, creditHours);
+            courses.Add(newCourse);
 
             Console.WriteLine("Course added successfully.");
         }
@@ -183,10 +222,22 @@ namespace SWS120Project
             Console.WriteLine("Program added successfully.");
         }
 
-        public static void createEnrolment()
+        static void EnrollStudent()
         {
-            Console.WriteLine("Enter student ID");
+            Console.Write("Enter student ID: ");
+            int studentId = validInt();
 
+            Console.Write("Enter course code: ");
+            string courseCode = Console.ReadLine();
+
+            Console.Write("Enter section number: ");
+            int sectionNumber = int.Parse(Console.ReadLine());
+
+            // Create a new enrolment object and add to the list of enrolments
+            Class1.enrolment newEnrolment= new enrolment(studentId,courseCode, sectionNumber);
+            enrolments.Add(newEnrolment);
+
+            Console.WriteLine("Student enrolled successfully.");
         }
 
         public static void displayStudent()
@@ -221,7 +272,7 @@ namespace SWS120Project
         static void DisplayCoursesTakenByStudent()
         {
             Console.Write("Enter student ID: ");
-            int studentId = int.Parse(Console.ReadLine());
+            int studentId = validInt();
 
             Console.WriteLine("Courses taken by student:");
             foreach (var enrolment in enrolments)
@@ -235,7 +286,7 @@ namespace SWS120Project
         static void DisplayCoursesTaughtByFaculty()
         {
             Console.Write("Enter faculty ID: ");
-            int facultyId = int.Parse(Console.ReadLine());
+            int facultyId = validInt();
 
             Console.WriteLine($"Courses taught by faculty with ID {facultyId}:");
             foreach (var course in courses)
