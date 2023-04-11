@@ -1,4 +1,15 @@
-﻿using System;
+﻿/*
+ Group:           SWS
+ Version:         1.0
+ Due Date:        April 10th 2023 
+ Assignment:      SWS Project
+
+
+Page Contributors                : Nathan     |  Carter      |  Salsabil     |  Haseeb
+IDS (Respective order)           : 301267524    301260800      301228347       301271802
+
+*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -45,11 +56,26 @@ namespace SWS120Project
                 get { return phoneNumber; }
                 set { phoneNumber = value; }
             }
+
+            public virtual void PrintDetails()
+            {
+                Console.WriteLine($"First Name: {this.firstName_}");
+                Console.WriteLine($"Last Name: {this.lastName_}");
+                Console.WriteLine($"E-Mail: {this.email_}");
+                Console.WriteLine($"Phone Number: {this.phoneNumber_}");
+            }
         }
 
         public class student : Person// student:child class of person
         {
             public string programCode;
+            
+            public override void PrintDetails()
+            {
+                Console.WriteLine($"Student ID:{this.ID_} ");
+                Console.WriteLine($"Program Code: {programCode_}");
+                base.PrintDetails();
+            }
 
             //different string from parent
             public string programCode_
@@ -68,14 +94,15 @@ namespace SWS120Project
                 this.programCode_ = programCode;
             }
 
-            public static void showStudentInfo()
-            {
-                Console.WriteLine();
-            }
         }
 
         public class faculty : Person// faculty:child class of person
         {
+            public override void PrintDetails()
+            {
+                Console.WriteLine($"Faculty ID: {this.ID_}");
+                base.PrintDetails();
+            }
 
             public faculty(int ID, string firstName, string lastName, string email, string phoneNumber)
             {
