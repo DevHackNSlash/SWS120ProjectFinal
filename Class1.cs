@@ -9,6 +9,7 @@ namespace SWS120Project
 {
     internal class Class1
     {
+        //person, parent class
         public class Person
         {
             int ID;
@@ -46,11 +47,11 @@ namespace SWS120Project
             }
         }
 
-        public class student : Person
+        public class student : Person// student:child class of person
         {
             public string programCode;
 
-
+            //different string from parent
             public string programCode_
             {
                 get { return programCode; }
@@ -73,7 +74,7 @@ namespace SWS120Project
             }
         }
 
-        public class faculty : Person
+        public class faculty : Person// faculty:child class of person
         {
 
             public faculty(int ID, string firstName, string lastName, string email, string phoneNumber)
@@ -87,6 +88,7 @@ namespace SWS120Project
             }
         }
 
+        //course class
         public class course
         {
             public string courseCode;
@@ -94,6 +96,7 @@ namespace SWS120Project
             public int facultyID;
             public int creditHours;
 
+            //properties
             public string courseCode_
             {
                 get { return courseCode; }
@@ -118,6 +121,7 @@ namespace SWS120Project
                 set { facultyID = value; }
             }
 
+            //constructor
            public course(string courseCode, string courseName, int facultyID, int creditHours)
             {
                 this.facultyID_ = facultyID;
@@ -129,6 +133,7 @@ namespace SWS120Project
             
         }
 
+        //enrolment class
         public class enrolment
         {
             public int id;
