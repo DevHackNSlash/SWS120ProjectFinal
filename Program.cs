@@ -1,4 +1,16 @@
-﻿using System;
+﻿/*
+ Group:           SWS
+ Version:         1.0
+ Due Date:        April 10th 2023 
+ Assignment:      SWS Project
+
+
+Page Contributors                : Nathan     |  Carter      |  Salsabil     |  Haseeb
+IDS (Respective order)           : 301267524    301260800      301228347       301271802
+
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +21,7 @@ namespace SWS120Project
 {
     internal class CollegeRegistration
     {
+        // Define static lists to hold information on students, faculty, courses, enrolments, and programs
         static List<Class1.course> courses = new List<Class1.course>();
         static List<Class1.enrolment> enrolments = new List<Class1.enrolment>();
         static List<Class1.student> students = new List<Class1.student>();
@@ -16,9 +29,9 @@ namespace SWS120Project
         static List<Class1.collegeProgram> programs = new List<Class1.collegeProgram>();
 
         //validation method for int static int validInt()
-    static int validInt()
+        static int validInt()
         {
-            while(true)
+            while (true)
             {
                 try
                 {
@@ -32,31 +45,34 @@ namespace SWS120Project
             }
         }
 
+        //A simple validation method to see if the given input contains an "@" symbol as should emails
         static string validEmail()
         {
+            //run until broken out
             while (true)
             {
-            
-                    string input = (Console.ReadLine());
+                string input = (Console.ReadLine());
 
+                //If input does not contain @ try again
                 if (!input.Contains("@"))
                 {
                     Console.WriteLine("Please Enter a valid email!");
                 }
-                else {
-
+                else
+                {
+                    //break out the loop and return the valid email 
                     return input;
-                    //break;
                 }
 
-                    
 
-               
+
+
             }
         }
         static void Main(string[] args)
         {
 
+            //Create some random data for the objects so we can test
             students.Add(new Class1.student(1, "John", "Doe", "john.doe@example.com", "123-456-7890", "CS101"));
             students.Add(new Class1.student(2, "Alice", "Johnson", "alice.johnson@example.com", "234-567-8910", "CS101"));
             faculties.Add(new Class1.faculty(1, "Jane", "Smith", "jane.smith@example.com", "234-567-8901"));
@@ -66,8 +82,10 @@ namespace SWS120Project
             enrolments.Add(new Class1.enrolment(2, "CS101", 1));
             bool running = true;
 
+            // Run until exited
             while (running)
             {
+                //menu 
                 Console.WriteLine("Please select an option:");
                 Console.WriteLine("1. Add a student");
                 Console.WriteLine("2. Add a faculty member");
@@ -82,8 +100,10 @@ namespace SWS120Project
                 Console.WriteLine("11. Display all students in a certain program");
                 Console.WriteLine("12. Exit");
 
+
                 string input = Console.ReadLine();
 
+                //match the user input to one of the following cases and call our methods accordingly
                 switch (input)
                 {
                     case "1":
@@ -129,14 +149,16 @@ namespace SWS120Project
             }
         }
 
+
+        //method to add student 
         public static void addStudent()
         {
             Console.WriteLine("Enter student ID:");
 
+            //call our int validation func to see if a valid input is given if it is store the value
+            int studentID = validInt();
+            // int studentID = int.Parse(Console.ReadLine());
 
-           int studentID = validInt();
-           // int studentID = int.Parse(Console.ReadLine());
-            
             Console.WriteLine("Enter first name:");
             string firstName = Console.ReadLine();
 
@@ -159,10 +181,11 @@ namespace SWS120Project
             Console.WriteLine("Student added successfully.");
         }
 
+        //method to add faculty
         public static void addFaculty()
         {
             Console.WriteLine("Enter faculty member ID:");
-            int facultyID = validInt(); 
+            int facultyID = validInt();
 
             Console.WriteLine("Enter first name:");
             string firstName = Console.ReadLine();
@@ -182,6 +205,7 @@ namespace SWS120Project
             Console.WriteLine("Faculty member added successfully.");
         }
 
+        //method to add a course to the list
         public static void addCourse()
         {
             Console.WriteLine("Enter course code:");
@@ -205,6 +229,7 @@ namespace SWS120Project
             Console.WriteLine("Course added successfully.");
         }
 
+        //method to add a program to the list
         public static void addProgram()
         {
             Console.WriteLine("Enter program code:");
@@ -222,6 +247,7 @@ namespace SWS120Project
             Console.WriteLine("Program added successfully.");
         }
 
+        //method to enroll a student in a course 
         static void EnrollStudent()
         {
             Console.Write("Enter student ID: ");
@@ -234,19 +260,20 @@ namespace SWS120Project
             int sectionNumber = int.Parse(Console.ReadLine());
 
             // Create a new enrolment object and add to the list of enrolments
-            Class1.enrolment newEnrolment= new enrolment(studentId,courseCode, sectionNumber);
+            Class1.enrolment newEnrolment = new enrolment(studentId, courseCode, sectionNumber);
             enrolments.Add(newEnrolment);
 
             Console.WriteLine("Student enrolled successfully.");
         }
 
+        //method to display student info given their  ID
         public static void displayStudent()
         {
             Console.WriteLine("Enter student ID:");
-            int studentID = int.Parse(Console.ReadLine());
+            int studentID = validInt();
 
             student foundStudent = null;
-
+            //try to find the student id in our list
             foreach (student s in students)
             {
                 if (s.ID_ == studentID)
@@ -258,6 +285,7 @@ namespace SWS120Project
 
             if (foundStudent != null)
             {
+                //if found then get their info and output
                 Console.WriteLine("Student ID: " + foundStudent.ID_);
                 Console.WriteLine("Name: " + foundStudent.firstName_ + " " + foundStudent.lastName_);
                 Console.WriteLine("Email: " + foundStudent.email_);
@@ -269,6 +297,7 @@ namespace SWS120Project
             }
         }
 
+        //method to display all the courses a student is currently taking
         static void DisplayCoursesTakenByStudent()
         {
             Console.Write("Enter student ID: ");
@@ -283,6 +312,8 @@ namespace SWS120Project
                 }
             }
         }
+
+        //method to display all the courses a faculty is currently teaching    
         static void DisplayCoursesTaughtByFaculty()
         {
             Console.Write("Enter faculty ID: ");
@@ -297,7 +328,7 @@ namespace SWS120Project
                 }
             }
         }
-
+        //method to display all the students in a course
         static void DisplayStudentsInProgram()
         {
             Console.Write("Enter program code: ");
@@ -313,6 +344,8 @@ namespace SWS120Project
             }
 
         }
+
+        //method to display all the courses a student is currently taking a course
         static void DisplayStudentsTakingCourse()
         {
             Console.Write("Enter course code: ");
@@ -328,6 +361,8 @@ namespace SWS120Project
                 }
             }
         }
+
+        //method to display all the courses info
         static void DisplayCourseInfo()
         {
             Console.Write("Enter course code: ");
@@ -356,8 +391,6 @@ namespace SWS120Project
             }
         }
     }
-    
+
 }
-
-
 
